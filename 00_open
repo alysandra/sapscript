@@ -1,0 +1,10 @@
+Function OpenSAP()
+Set WshShell = CreateObject("WScript.Shell")
+ 
+ 'please use the saplogin address on your own computer, this is mine
+ Set proc = WshShell.Exec("C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplogon.exe")
+  
+ 'force vba to pause for 5 sec
+Application.Wait (Now + TimeValue("0:00:05"))
+
+End Function
