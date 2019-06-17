@@ -1,0 +1,7 @@
+this is a compiled list of the SAP scripting kinks, odds & ends that i use regularly during scripting. 
+
+I will try to update this as a menu page when I add in new codes
+
+1) OPEN sap shell (on a Core I5, hp elitebook, this takes about 2-3 seconds, so a delay of 5 sec is built in so that code runs properly)
+2) Login to SAP -> this is the basic - pulling data saved directly in VBA (I have another code that pulls another layer of security, pulling data from a different excel spreadsheet)
+3) checking for other logins - terminating
