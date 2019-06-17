@@ -1,0 +1,31 @@
+Function loginSAP()
+'error checking, if SAP is already opened, then skip, else call code to open SAP
+On Error Resume Next
+If GetObject("SAPGUI") = 0 Then
+Call OpenSAP
+End If
+On Error GoTo 0
+
+
+Set SAPGUI = GetObject("SAPGUI")
+Set Appl = SAPGUI.GetScriptingEngine
+
+'application connection is the connection name that you used on SAP login page.. mine is called DR3
+Set connection = Appl.Openconnection("DR3", True) 
+Set session = connection.Children(0)
+session.findById("wnd[0]/usr/txtRSYST-BNAME").Text = "myloginID"
+session.findById("wnd[0]/usr/pwdRSYST-BCODE").Text = "mypassword"
+
+session.findById("wnd[0]").sendVKey 0
+
+'if multiple login detected, this will terminate the original login & force this login instead
+If session.ActiveWindow.Text = "License Information for Multiple Login" Then
+session.findById("wnd[1]/usr/radMULTI_LOGON_OPT1").Select
+session.findById("wnd[0]").sendVKey 0
+End If
+
+session.findById("wnd[0]").sendVKey 0
+'additonal enter in case of any alert/alarm messages
+session.findById("wnd[0]").sendVKey 0
+
+End Function
